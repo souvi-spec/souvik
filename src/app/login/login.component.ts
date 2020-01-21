@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, AbstractControl, FormBuilder, Validators } from '@angular/forms';
 import { UserService } from '../user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
    // private spinner: NgxSpinnerService,
-    //private router: Router,
+    private router: Router,
     public formbuilder: FormBuilder,
      private userService: UserService
   ) {
@@ -38,10 +39,18 @@ export class LoginComponent implements OnInit {
       }
     console.log('the data is ...',sendata);
     let data = this.userService.login(sendata);
+
+       if(data == true){
+           this.userService.alertForSuccess('login sucessfull','Sucess');
+           this.router.navigate(['about']);
+        }
+        else
+          this.userService.alertForWarning('error occured','Warning'); 
+          
     }
-    else{
-    console.log('no data found');
-    }
+    else
+      this.userService.alertFordanger('No email and password is provided','Danger');
+    
   }
   
 }
