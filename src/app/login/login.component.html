@@ -1,6 +1,6 @@
 <form [formGroup]="loginform" (ngSubmit)="login()">
   <div>
-    <label for="email">Email:</label>
+    <label for="email">Emailid:</label>
     <input type="email" class="form-control col-md-4" id="email" placeholder="Enter email" formControlName="email">
     <div *ngIf="loginform.controls?.email?.invalid">
             
